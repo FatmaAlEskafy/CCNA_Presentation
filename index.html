@@ -1,0 +1,2213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CCNA – Cisco Certified Network Associate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+/* ============================================================
+   CSS VARIABLES & RESET
+   ============================================================ */
+:root {
+  --bg: #FFFFFF;
+  --primary: #12355B;
+  --secondary: #1D4E89;
+  --accent: #2A9D8F;
+  --gray: #F5F7FA;
+  --dark: #333333;
+  --border: #E3E7EB;
+  --shadow: 0 12px 28px rgba(0,0,0,.06);
+  --radius: 10px;
+  --font-title: 'Poppins', 'Aptos', sans-serif;
+  --font-body: 'Inter', 'Aptos', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: #0b1f38;
+  font-family: var(--font-body);
+  color: var(--dark);
+}
+
+/* ============================================================
+   PRESENTATION SHELL
+   ============================================================ */
+#presentation {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ============================================================
+   SLIDES
+   ============================================================ */
+.slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .55s ease;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.slide.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+#nav {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  z-index: 9999;
+  background: rgba(18,53,91,.88);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 50px;
+  padding: 10px 24px;
+  backdrop-filter: blur(10px);
+}
+
+#nav button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 50%;
+  transition: background .2s;
+}
+
+#nav button:hover { background: rgba(255,255,255,.15); }
+#nav button svg { width: 20px; height: 20px; }
+
+#counter {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: rgba(255,255,255,.75);
+  min-width: 52px;
+  text-align: center;
+  letter-spacing: .5px;
+}
+
+#fullscreen-btn {
+  margin-left: 4px;
+}
+
+/* ============================================================
+   SHARED LAYOUT UTILITIES
+   ============================================================ */
+.slide-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 56px 72px 80px;
+}
+
+.slide-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.slide-title {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: clamp(32px, 3.6vw, 52px);
+  color: var(--primary);
+  line-height: 1.15;
+}
+
+.slide-subtitle {
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: clamp(18px, 2vw, 26px);
+  color: var(--secondary);
+}
+
+.accent-bar {
+  width: 52px;
+  height: 4px;
+  background: var(--accent);
+  border-radius: 2px;
+  margin: 14px 0 28px;
+}
+
+.body-text {
+  font-family: var(--font-body);
+  font-size: clamp(15px, 1.25vw, 18px);
+  color: #555;
+  line-height: 1.7;
+}
+
+img.slide-img {
+  object-fit: cover;
+  border-radius: var(--radius);
+  display: block;
+}
+
+/* ============================================================
+   SLIDE 1 – HERO
+   ============================================================ */
+#slide-1 {
+  background:
+    linear-gradient(rgba(8,22,44,.72), rgba(8,22,44,.72)),
+    url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1600&q=80') center/cover no-repeat;
+  color: #fff;
+}
+
+.s1-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px;
+  position: relative;
+}
+
+.s1-tag {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+  border: 1px solid rgba(42,157,143,.5);
+  display: inline-block;
+  padding: 6px 18px;
+  border-radius: 20px;
+}
+
+.s1-title {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: clamp(72px, 10vw, 140px);
+  color: #fff;
+  letter-spacing: -2px;
+  line-height: 1;
+  margin-bottom: 18px;
+}
+
+.s1-sub {
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: clamp(18px, 2.2vw, 30px);
+  color: rgba(255,255,255,.82);
+  margin-bottom: 48px;
+  letter-spacing: .5px;
+}
+
+.s1-divider {
+  width: 1px;
+  height: 48px;
+  background: rgba(255,255,255,.25);
+  margin: 0 auto 48px;
+}
+
+.s1-bottom {
+  display: flex;
+  gap: 60px;
+  align-items: center;
+  justify-content: center;
+}
+
+.s1-pill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.s1-pill-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+}
+
+.s1-pill-value {
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: 15px;
+  color: rgba(255,255,255,.9);
+}
+
+.s1-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(42,157,143,.7);
+}
+
+/* ============================================================
+   SLIDE 2 – WHAT IS CCNA
+   ============================================================ */
+#slide-2 .slide-inner {
+  flex-direction: row;
+  gap: 0;
+  padding: 0;
+}
+
+.s2-left {
+  width: 44%;
+  padding: 64px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--bg);
+}
+
+.s2-right {
+  width: 56%;
+  position: relative;
+  overflow: hidden;
+}
+
+.s2-right img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.s2-right::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(255,255,255,.18) 0%, transparent 30%);
+  z-index: 1;
+}
+
+.s2-bullets {
+  list-style: none;
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.s2-bullets li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  font-size: clamp(14px, 1.2vw, 17px);
+  color: #4a5568;
+  line-height: 1.55;
+}
+
+.s2-bullet-icon {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  background: var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+.s2-bullet-icon svg { width: 12px; height: 12px; color: #fff; }
+
+.s2-stat-row {
+  display: flex;
+  gap: 28px;
+  margin-top: 36px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+}
+
+.s2-stat { display: flex; flex-direction: column; gap: 2px; }
+.s2-stat-num {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: clamp(22px, 2.5vw, 34px);
+  color: var(--primary);
+}
+.s2-stat-lbl {
+  font-size: 12px;
+  color: #888;
+  letter-spacing: .5px;
+}
+
+/* ============================================================
+   SLIDE 3 – WHY LEARN CCNA
+   ============================================================ */
+#slide-3 {
+  background: var(--gray);
+}
+
+#slide-3 .slide-inner {
+  padding: 52px 72px 68px;
+}
+
+.s3-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 8px;
+  flex: 1;
+}
+
+.s3-card {
+  background: var(--bg);
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform .25s ease, box-shadow .25s ease;
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+}
+
+.s3-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .3s ease;
+}
+
+.s3-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 44px rgba(0,0,0,.1);
+}
+
+.s3-card:hover::after { transform: scaleX(1); }
+
+.s3-icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background: rgba(42,157,143,.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.s3-icon-wrap svg { width: 24px; height: 24px; color: var(--accent); }
+
+.s3-card-title {
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: clamp(14px, 1.1vw, 16px);
+  color: var(--primary);
+}
+
+.s3-card-body {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* ============================================================
+   SLIDE 4 – NETWORK TOPOLOGY
+   ============================================================ */
+#slide-4 .slide-inner {
+  padding: 52px 72px 68px;
+  flex-direction: column;
+  gap: 0;
+}
+
+.s4-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  flex: 1;
+  min-height: 0;
+}
+
+.s4-diagram {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  justify-content: center;
+  padding-right: 12px;
+}
+
+.s4-diagram-title {
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: 13px;
+  color: #888;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.diagram-chain {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+}
+
+.diagram-node {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 20px;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  width: 100%;
+  max-width: 320px;
+}
+
+.diagram-node-icon {
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.diagram-node-icon svg { width: 20px; height: 20px; color: #fff; }
+
+.diagram-node-info { display: flex; flex-direction: column; gap: 1px; }
+.diagram-node-name {
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--primary);
+}
+
+.diagram-node-sub { font-size: 11px; color: #888; }
+
+.diagram-arrow {
+  display: flex;
+  align-items: center;
+  padding-left: 39px;
+  margin: 2px 0;
+}
+
+.diagram-arrow svg { width: 18px; height: 18px; color: var(--accent); }
+
+.s4-photo {
+  border-radius: var(--radius);
+  overflow: hidden;
+  position: relative;
+}
+
+.s4-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.s4-photo-badge {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  background: rgba(18,53,91,.85);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
+}
+
+.s4-bottom {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.s4-mini-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: var(--shadow);
+}
+
+.s4-mini-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 7px;
+  background: rgba(29,78,137,.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.s4-mini-icon svg { width: 18px; height: 18px; color: var(--secondary); }
+.s4-mini-label { font-family: var(--font-title); font-weight: 600; font-size: 13px; color: var(--primary); }
+
+/* ============================================================
+   SLIDE 5 – ROADMAP
+   ============================================================ */
+#slide-5 .slide-inner {
+  padding: 52px 72px 68px;
+}
+
+.s5-timeline {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  padding: 20px 0;
+}
+
+.s5-track {
+  display: flex;
+  align-items: stretch;
+  position: relative;
+  justify-content: space-between;
+  gap: 0;
+}
+
+.s5-connector {
+  position: absolute;
+  top: 28px;
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--primary), var(--accent));
+  z-index: 0;
+}
+
+.s5-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  z-index: 1;
+  flex: 1;
+}
+
+.s5-circle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 3px solid var(--primary);
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--primary);
+  transition: background .25s, color .25s;
+  flex-shrink: 0;
+}
+
+.s5-step.active .s5-circle,
+.s5-step:hover .s5-circle {
+  background: var(--primary);
+  color: #fff;
+}
+
+.s5-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 18px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  width: 100%;
+  max-width: 170px;
+}
+
+.s5-card-title {
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--primary);
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+
+.s5-card-sub {
+  font-size: 11px;
+  color: #888;
+  line-height: 1.5;
+}
+
+.s5-card-num {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+/* ============================================================
+   SLIDE 6 – OSI MODEL
+   ============================================================ */
+#slide-6 .slide-inner {
+  flex-direction: row;
+  align-items: stretch;
+  gap: 0;
+  padding: 0;
+}
+
+.s6-left {
+  width: 52%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px 52px;
+  background: var(--bg);
+}
+
+.s6-right {
+  width: 48%;
+  background: var(--primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 52px 48px;
+  gap: 10px;
+}
+
+.s6-right-title {
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  margin-bottom: 12px;
+}
+
+.s6-right-text {
+  font-size: 14px;
+  color: rgba(255,255,255,.8);
+  line-height: 1.65;
+}
+
+.osi-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.osi-layer {
+  display: grid;
+  grid-template-columns: 32px 1fr 1fr;
+  align-items: center;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.osi-num {
+  width: 32px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 12px;
+  color: #fff;
+  padding: 12px 0;
+}
+
+.osi-name {
+  padding: 12px 16px;
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--primary);
+  background: var(--bg);
+  border-right: 1px solid var(--border);
+}
+
+.osi-desc {
+  padding: 10px 14px;
+  font-size: 11.5px;
+  color: #666;
+  background: var(--gray);
+}
+
+/* ============================================================
+   SLIDE 7 – IPv4 VS IPv6
+   ============================================================ */
+#slide-7 .slide-inner {
+  padding: 52px 72px 68px;
+}
+
+#slide-7 {
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+
+#slide-7::before {
+  content: '';
+  position: absolute;
+  bottom: -80px; right: -80px;
+  width: 420px; height: 420px;
+  background: radial-gradient(circle, rgba(42,157,143,.06) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.s7-vs-row {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 28px;
+  align-items: stretch;
+  margin-top: 8px;
+}
+
+.s7-panel {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.s7-panel-head {
+  padding: 22px 28px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.s7-panel-head.v4 { background: var(--primary); }
+.s7-panel-head.v6 { background: var(--secondary); }
+
+.s7-panel-head svg { width: 26px; height: 26px; color: rgba(255,255,255,.8); flex-shrink: 0; }
+
+.s7-panel-head-title {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 22px;
+  color: #fff;
+}
+
+.s7-panel-head-sub {
+  font-size: 11px;
+  color: rgba(255,255,255,.65);
+  letter-spacing: .5px;
+}
+
+.s7-panel-body {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.s7-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  gap: 12px;
+}
+
+.s7-row:last-child { border-bottom: none; }
+
+.s7-row-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  white-space: nowrap;
+}
+
+.s7-row-val {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--dark);
+  text-align: right;
+}
+
+.s7-vs-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.s7-vs-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 14px;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(42,157,143,.3);
+}
+
+/* ============================================================
+   SLIDE 8 – ROUTING VS SWITCHING (PREMIUM)
+   ============================================================ */
+#slide-8 .slide-inner {
+  padding: 52px 72px 68px;
+  gap: 0;
+}
+
+.s8-panels {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 36px;
+  flex: 1;
+  min-height: 0;
+  margin-top: 8px;
+}
+
+.s8-divider {
+  background: var(--border);
+  align-self: stretch;
+}
+
+.s8-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.s8-panel-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border);
+}
+
+.s8-icon-box {
+  width: 52px;
+  height: 52px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.s8-icon-box.routing { background: rgba(18,53,91,.08); }
+.s8-icon-box.switching { background: rgba(42,157,143,.08); }
+.s8-icon-box.routing svg { color: var(--primary); }
+.s8-icon-box.switching svg { color: var(--accent); }
+.s8-icon-box svg { width: 26px; height: 26px; }
+
+.s8-panel-name {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: clamp(18px, 2vw, 26px);
+  color: var(--primary);
+}
+
+.s8-panel-def {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.55;
+}
+
+.s8-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.s8-meta {
+  background: var(--gray);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+.s8-meta-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 5px;
+}
+
+.s8-meta-val {
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--primary);
+}
+
+.s8-traits {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.s8-trait {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: #4a5568;
+}
+
+.s8-trait::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+.s8-photos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 16px;
+}
+
+.s8-photo-wrap {
+  position: relative;
+  height: 130px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.s8-photo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.s8-photo-caption {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: linear-gradient(transparent, rgba(18,53,91,.82));
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 16px 14px 10px;
+  letter-spacing: .5px;
+}
+
+/* ============================================================
+   SLIDE 9 – SECURITY (GLASSMORPHISM / DARK)
+   ============================================================ */
+#slide-9 {
+  background:
+    linear-gradient(rgba(5,16,32,.72), rgba(5,16,32,.72)),
+    url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1600&q=80') center/cover no-repeat;
+  color: #fff;
+}
+
+#slide-9 .slide-inner {
+  padding: 52px 72px 68px;
+}
+
+#slide-9 .slide-label { color: var(--accent); }
+#slide-9 .slide-title { color: #fff; }
+#slide-9 .accent-bar { background: var(--accent); }
+
+.s9-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 8px;
+}
+
+.s9-card {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: var(--radius);
+  padding: 28px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 12px 28px rgba(0,0,0,.22);
+  position: relative;
+  overflow: hidden;
+  transition: background .25s;
+}
+
+.s9-card:hover { background: rgba(255,255,255,.1); }
+
+.s9-card-accent {
+  width: 36px;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.s9-icon-wrap {
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  background: rgba(42,157,143,.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.s9-icon-wrap svg { width: 24px; height: 24px; color: var(--accent); }
+
+.s9-card-title {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: clamp(16px, 1.5vw, 21px);
+  color: #fff;
+}
+
+.s9-card-body {
+  font-size: 13px;
+  color: rgba(255,255,255,.65);
+  line-height: 1.65;
+}
+
+/* ============================================================
+   SLIDE 10 – CAREER ROADMAP
+   ============================================================ */
+#slide-10 .slide-inner {
+  flex-direction: row;
+  padding: 0;
+  gap: 0;
+}
+
+.s10-left {
+  width: 38%;
+  background: var(--primary);
+  padding: 60px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+}
+
+.s10-left .slide-label { color: rgba(255,255,255,.55); }
+.s10-left .slide-title { color: #fff; }
+.s10-left .accent-bar { background: var(--accent); }
+
+.s10-left-body {
+  font-size: 14px;
+  color: rgba(255,255,255,.7);
+  line-height: 1.7;
+}
+
+.s10-right {
+  width: 62%;
+  padding: 52px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+  background: var(--bg);
+}
+
+.career-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  position: relative;
+}
+
+.career-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 19px;
+  top: 44px;
+  width: 2px;
+  bottom: -20px;
+  background: var(--border);
+}
+
+.career-marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.career-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.career-circle svg { width: 18px; height: 18px; color: var(--primary); }
+.career-circle.highlight { background: var(--primary); }
+.career-circle.highlight svg { color: #fff; }
+
+.career-content {
+  padding: 8px 0 28px;
+}
+
+.career-title {
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: clamp(13px, 1.2vw, 16px);
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+
+.career-desc {
+  font-size: 12.5px;
+  color: #777;
+  line-height: 1.55;
+}
+
+/* ============================================================
+   SLIDE 11 – BENEFITS RADIAL
+   ============================================================ */
+#slide-11 .slide-inner {
+  padding: 52px 72px 68px;
+}
+
+#slide-11 {
+  background: var(--gray);
+}
+
+.s11-layout {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-top: 8px;
+  align-items: center;
+}
+
+.s11-radial-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.s11-radial-svg {
+  width: 340px;
+  height: 340px;
+  flex-shrink: 0;
+}
+
+.s11-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.s11-benefit-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: var(--shadow);
+  transition: transform .2s;
+}
+
+.s11-benefit-card:hover { transform: translateX(5px); }
+
+.s11-benefit-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: rgba(18,53,91,.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.s11-benefit-icon svg { width: 20px; height: 20px; color: var(--primary); }
+
+.s11-benefit-info {}
+.s11-benefit-name {
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: 13.5px;
+  color: var(--primary);
+}
+
+.s11-benefit-sub {
+  font-size: 12px;
+  color: #888;
+  margin-top: 2px;
+}
+
+/* ============================================================
+   SLIDE 12 – THANK YOU (PREMIUM CLOSING)
+   ============================================================ */
+#slide-12 {
+  background:
+    linear-gradient(rgba(6,18,36,.74), rgba(6,18,36,.74)),
+    url('https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=1600&q=80') center/cover no-repeat;
+  color: #fff;
+}
+
+.s12-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 72px;
+  position: relative;
+}
+
+.s12-tag {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 22px;
+}
+
+.s12-title {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: clamp(60px, 9vw, 120px);
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.s12-sub {
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: clamp(18px, 2vw, 28px);
+  color: rgba(255,255,255,.75);
+  margin-bottom: 44px;
+}
+
+.s12-divider {
+  width: 80px;
+  height: 1px;
+  background: rgba(255,255,255,.22);
+  margin: 0 auto 44px;
+}
+
+.s12-contact {
+  display: flex;
+  gap: 52px;
+  align-items: flex-start;
+}
+
+.s12-contact-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.s12-contact-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.45);
+}
+
+.s12-contact-value {
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: 14px;
+  color: rgba(255,255,255,.88);
+}
+
+.s12-sep {
+  width: 1px;
+  height: 48px;
+  background: rgba(255,255,255,.18);
+  margin-top: 12px;
+}
+
+.s12-logo {
+  position: absolute;
+  bottom: 40px;
+  right: 60px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.s12-logo-text {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 12px;
+  color: rgba(255,255,255,.35);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   SLIDE HEADER (for slides with common header)
+   ============================================================ */
+.slide-header {
+  margin-bottom: 6px;
+}
+</style>
+</head>
+<body>
+
+<div id="presentation">
+
+  <!-- ======================================================
+       SLIDE 1 – HERO
+       ====================================================== -->
+  <div class="slide active" id="slide-1">
+    <div class="s1-inner">
+      <div class="s1-tag">Cisco Certification Program</div>
+      <div class="s1-title">CCNA</div>
+      <div class="s1-sub">Cisco Certified Network Associate</div>
+      <div class="s1-divider"></div>
+      <div class="s1-bottom">
+        <div class="s1-pill">
+          <span class="s1-pill-label">Domain</span>
+          <span class="s1-pill-value">CCNA Course</span>
+        </div>
+        <div class="s1-dot"></div>
+        <div class="s1-pill">
+          <span class="s1-pill-label">Presented by</span>
+          <span class="s1-pill-value">Abdelaziz Mohamed</span>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================
+       SLIDE 2 – WHAT IS CCNA
+       ====================================================== -->
+  <div class="slide" id="slide-2">
+    <div class="slide-inner" style="flex-direction:row;padding:0;gap:0;">
+      <div class="s2-left">
+        <div class="slide-header">
+          <div class="slide-label">Overview</div>
+          <div class="slide-title">What is CCNA?</div>
+          <div class="accent-bar"></div>
+        </div>
+        <p class="body-text" style="margin-bottom:24px;">
+          The CCNA is Cisco's flagship entry-level certification that validates proficiency in network fundamentals, IP connectivity, and security essentials — the starting point for every serious network career.
+        </p>
+        <ul class="s2-bullets">
+          <li>
+            <div class="s2-bullet-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            Entry-level Cisco certification for networking professionals
+          </li>
+          <li>
+            <div class="s2-bullet-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            Covers routing, switching, security, and automation
+          </li>
+          <li>
+            <div class="s2-bullet-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            Practical, lab-oriented skills applicable on day one
+          </li>
+          <li>
+            <div class="s2-bullet-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            Globally recognized by enterprise employers
+          </li>
+        </ul>
+        <div class="s2-stat-row">
+          <div class="s2-stat">
+            <span class="s2-stat-num">1M+</span>
+            <span class="s2-stat-lbl">Certified Professionals</span>
+          </div>
+          <div class="s2-stat">
+            <span class="s2-stat-num">160+</span>
+            <span class="s2-stat-lbl">Countries Worldwide</span>
+          </div>
+          <div class="s2-stat">
+            <span class="s2-stat-num">30+</span>
+            <span class="s2-stat-lbl">Years of Cisco Trust</span>
+          </div>
+        </div>
+      </div>
+      <div class="s2-right">
+        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80" alt="Network Hardware" style="width:100%;height:100%;object-fit:cover;" />
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================
+       SLIDE 3 – WHY LEARN CCNA
+       ====================================================== -->
+  <div class="slide" id="slide-3">
+    <div class="slide-inner">
+      <div class="slide-header">
+        <div class="slide-label">Purpose</div>
+        <div class="slide-title">Why Learn CCNA?</div>
+        <div class="accent-bar"></div>
+      </div>
+      <div class="s3-grid">
+        <div class="s3-card">
+          <div class="s3-icon-wrap">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+          </div>
+          <div class="s3-card-title">High Industry Demand</div>
+          <div class="s3-card-body">Network engineers consistently rank among the most in-demand IT roles globally, with CCNA-certified candidates receiving faster hiring decisions.</div>
+        </div>
+        <div class="s3-card">
+          <div class="s3-icon-wrap">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
+          <div class="s3-card-title">Career Opportunities</div>
+          <div class="s3-card-body">Unlock roles including Network Technician, Administrator, and Engineer — each offering competitive salaries and clear advancement tracks.</div>
+        </div>
+        <div class="s3-card">
+          <div class="s3-icon-wrap">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
+          <div class="s3-card-title">Practical Labs</div>
+          <div class="s3-card-body">Hands-on lab exercises using Cisco Packet Tracer and real hardware develop skills directly applicable to enterprise environments.</div>
+        </div>
+        <div class="s3-card">
+          <div class="s3-icon-wrap">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" stroke-linejoin="round" d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+          </div>
+          <div class="s3-card-title">Global Recognition</div>
+          <div class="s3-card-body">Recognized by Fortune 500 companies and government agencies in over 160 countries — a credential that speaks universally.</div>
+        </div>
+        <div class="s3-card">
+          <div class="s3-icon-wrap">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+          </div>
+          <div class="s3-card-title">Strong Foundation</div>
+          <div class="s3-card-body">Builds deep understanding of TCP/IP, subnetting, VLANs, and routing protocols — the bedrock of every modern enterprise network.</div>
+        </div>
+        <div class="s3-card">
+          <div class="s3-icon-wrap">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+          </div>
+          <div class="s3-card-title">Advanced Certifications</div>
+          <div class="s3-card-body">CCNA is the gateway to CCNP, CCIE, and specialized Cisco tracks in security, data center, and service provider domains.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================
+       SLIDE 4 – NETWORK TOPOLOGY
+       ====================================================== -->
+  <div class="slide" id="slide-4">
+    <div class="slide-inner">
+      <div class="slide-header">
+        <div class="slide-label">Architecture</div>
+        <div class="slide-title">Network Topology</div>
+        <div class="accent-bar"></div>
+      </div>
+      <div class="s4-top">
+        <div class="s4-diagram">
+          <div class="s4-diagram-title">Hierarchical Network Flow</div>
+          <div class="diagram-chain">
+            <div class="diagram-node">
+              <div class="diagram-node-icon">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+              </div>
+              <div class="diagram-node-info">
+                <span class="diagram-node-name">Internet</span>
+                <span class="diagram-node-sub">WAN — Public IP Space</span>
+              </div>
+            </div>
+            <div class="diagram-arrow">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M12 5v14m-7-7l7 7 7-7"/></svg>
+            </div>
+            <div class="diagram-node">
+              <div class="diagram-node-icon">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+              </div>
+              <div class="diagram-node-info">
+                <span class="diagram-node-name">Router</span>
+                <span class="diagram-node-sub">Layer 3 — Inter-network routing</span>
+              </div>
+            </div>
+            <div class="diagram-arrow">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M12 5v14m-7-7l7 7 7-7"/></svg>
+            </div>
+            <div class="diagram-node">
+              <div class="diagram-node-icon">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="2"/><path d="M6 12h.01M10 12h.01M14 12h.01M18 12h.01"/></svg>
+              </div>
+              <div class="diagram-node-info">
+                <span class="diagram-node-name">Switch</span>
+                <span class="diagram-node-sub">Layer 2 — VLAN segmentation</span>
+              </div>
+            </div>
+            <div class="diagram-arrow">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M12 5v14m-7-7l7 7 7-7"/></svg>
+            </div>
+            <div class="diagram-node">
+              <div class="diagram-node-icon">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+              </div>
+              <div class="diagram-node-info">
+                <span class="diagram-node-name">End Device</span>
+                <span class="diagram-node-sub">PC / Workstation / Server</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="s4-photo">
+          <img src="https://images.unsplash.com/photo-1606166325683-e6deb697d301?w=900&q=80" alt="Cisco Router" />
+          <div class="s4-photo-badge">Cisco ISR Series</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======================================================
+       SLIDE 5 – ROADMAP
+       ====================================================== -->
+  <div class="slide" id="slide-5">
+    <div class="slide-inner">
+      <div class="slide-header">
+        <div class="slide-label">Curriculum</div>
+        <div class="slide-title">Exam Domains</div>
+        <div class="accent-bar"></div>
+      </div>
+      <div class="s5-timeline">
+        <div style="text-align:center;margin-bottom:32px;">
+          <p class="body-text">The CCNA 200-301 exam spans five core knowledge domains, each building on the previous to create a comprehensive networking skill set.</p>
+        </div>
+        <div class="s5-track">
+          <div class="s5-connector"></div>
+          <div class="s5-step active">
+            <div class="s5-circle">1</div>
+            <div class="s5-card">
+              <div class="s5-card-num">20%</div>
+              <div class="s5-card-title">Network Fundamentals</div>
+              <div class="s5-card-sub">OSI/TCP-IP models, cabling, IPv4 &amp; IPv6 addressing</div>
+            </div>
+          </div>
+          <div class="s5-step">
+            <div class="s5-circle">2</div>
+            <div class="s5-card">
+              <div class="s5-card-num">25%</div>
+              <div class="s5-card-title">IP Connectivity</div>
+              <div class="s5-card-sub">Static routing, OSPF, first-hop redundancy</div>
+            </div>
+          </div>
+          <div class="s5-step">
+            <div class="s5-circle">3</div>
+            <div class="s5-card">
+              <div class="s5-card-num">10%</div>
+              <div class="s5-card-title">IP Services</div>
+              <div class="s5-card-sub">NAT, NTP, DHCP, DNS, SNMP, QoS</div>
+            </div>
+          </div>
+          <div class="s5-step">
+            <div class="s5-circle">4</div>
+            <div class="s5-card">
+              <div class="s5-card-num">15%</div>
+              <div class="s5-card-title">Security Fundamentals</div>
+              <div class="s5-card-sub">ACLs, VPN, AAA, port security, firewalls</div>
+            </div>
+          </div>
+          <div class="s5-step">
+            <div class="s5-circle">5</div>
+            <div class="s5-card">
+              <div class="s5-card-num">15%</div>
+              <div class="s5-card-title">Automation</div>
+              <div class="s5-card-sub">SDN, REST APIs, Python basics, Ansible</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================
+       SLIDE 6 – OSI MODEL
+       ====================================================== -->
+  <div class="slide" id="slide-6">
+    <div class="slide-inner" style="flex-direction:row;padding:0;gap:0;">
+      <div class="s6-left">
+        <div class="slide-label">Reference Model</div>
+        <div class="slide-title">The OSI Model</div>
+        <div class="accent-bar"></div>
+        <div class="osi-stack">
+          <div class="osi-layer">
+            <div class="osi-num" style="background:#1a4a8a;">7</div>
+            <div class="osi-name">Application</div>
+            <div class="osi-desc">HTTP, FTP, DNS, SMTP — user-facing protocols</div>
+          </div>
+          <div class="osi-layer">
+            <div class="osi-num" style="background:#1d5ea8;">6</div>
+            <div class="osi-name">Presentation</div>
+            <div class="osi-desc">Encryption, compression, data translation</div>
+          </div>
+          <div class="osi-layer">
+            <div class="osi-num" style="background:#2072c3;">5</div>
+            <div class="osi-name">Session</div>
+            <div class="osi-desc">Session establishment, management and teardown</div>
+          </div>
+          <div class="osi-layer">
+            <div class="osi-num" style="background:#2a9d8f;">4</div>
+            <div class="osi-name">Transport</div>
+            <div class="osi-desc">TCP/UDP — reliable or fast delivery, ports</div>
+          </div>
+          <div class="osi-layer">
+            <div class="osi-num" style="background:#22897c;">3</div>
+            <div class="osi-name">Network</div>
+            <div class="osi-desc">IP addressing, routing, logical paths</div>
+          </div>
+          <div class="osi-layer">
+            <div class="osi-num" style="background:#1a6e63;">2</div>
+            <div class="osi-name">Data Link</div>
+            <div class="osi-desc">MAC addressing, frames, Ethernet, VLANs</div>
+          </div>
+          <div class="osi-layer">
+            <div class="osi-num" style="background:#12504a;">1</div>
+            <div class="osi-name">Physical</div>
+            <div class="osi-desc">Cables, connectors, electrical signals, bits</div>
+          </div>
+        </div>
+      </div>
+      <div class="s6-right">
+        <div class="s6-right-title">Why the OSI Model Matters</div>
+        <p class="s6-right-text">The OSI model provides a universal framework that enables network professionals to troubleshoot systematically — isolating issues layer by layer rather than guessing blindly.</p>
+        <p class="s6-right-text" style="margin-top:16px;">Understanding which protocols operate at which layers is foundational knowledge tested throughout the CCNA exam and applied daily in enterprise environments.</p>
+        <div style="margin-top:32px;padding-top:24px;border-top:1px solid rgba(255,255,255,.12);">
+          <div style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:14px;">Key Mnemonic</div>
+          <div style="font-family:var(--font-title);font-weight:600;font-size:16px;color:rgba(255,255,255,.9);line-height:2;">
+            <span style="color:var(--accent);">A</span>ll &nbsp;
+            <span style="color:var(--accent);">P</span>eople &nbsp;
+            <span style="color:var(--accent);">S</span>eem &nbsp;
+            <span style="color:var(--accent);">T</span>o &nbsp;
+            <span style="color:var(--accent);">N</span>eed &nbsp;
+            <span style="color:var(--accent);">D</span>ata &nbsp;
+            <span style="color:var(--accent);">P</span>rocessing
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================
+       SLIDE 7 – IPv4 VS IPv6
+       ====================================================== -->
+  <div class="slide" id="slide-7">
+    <div class="slide-inner">
+      <div class="slide-header">
+        <div class="slide-label">Addressing</div>
+        <div class="slide-title">IPv4 vs IPv6</div>
+        <div class="accent-bar"></div>
+      </div>
+      <div class="s7-vs-row">
+        <div class="s7-panel">
+          <div class="s7-panel-head v4">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            <div>
+              <div class="s7-panel-head-title">IPv4</div>
+              <div class="s7-panel-head-sub">Internet Protocol Version 4</div>
+            </div>
+          </div>
+          <div class="s7-panel-body">
+            <div class="s7-row">
+              <span class="s7-row-label">Address Size</span>
+              <span class="s7-row-val">32-bit</span>
+            </div>
+            <div class="s7-row">
+              <span class="s7-row-label">Format</span>
+              <span class="s7-row-val">192.168.1.1</span>
+            </div>
+            <div class="s7-row">
+              <span class="s7-row-label">Total Addresses</span>
+              <span class="s7-row-val">~4.3 Billion</span>
+            </div>
+            <div class="s7-row">
+              <span class="s7-row-label">Header Size</span>
+              <span class="s7-row-val">20–60 bytes</span>
+            </div>
+            <div class="s7-row">
+              <span class="s7-row-label">NAT Required</span>
+              <span class="s7-row-val">Yes (exhaustion)</span>
+            </div>
+            <div class="s7-row">
+              <span class="s7-row-label">Configuration</span>
+              <span class="s7-row-val">Manual / DHCP</span>
+            </div>
+            
+          </div>
+        </div>
+        <div class="s7-vs-badge">
+          <div class="s7-vs-circle">VS</div>
+        </div>
+        <div class="s7-panel">
+          <div class="s7-panel-head v6">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+            <div>
+              <div class="s7-panel-head-title">IPv6</div>
+              <div class="s7-panel-head-sub">Internet Protocol Version 6</div>
+            </div>
+          </div>
+          <div class="s7-panel-body">
+            <div class="s7-row">
+              <span class="s7-row-label">Address Size</span>
+              <span class="s7-row-val">128-bit</span>
+            </div>
+            <div class="s7-row">
+              <span class="s7-row-label">Format</span>
+              <span class="s7-row-val">2001:db8::1</span>
+            </div>
+            <div class="s7-row">
+              <span class="s7-row-label">Total Addresses</span>
+              <span class="s7-row-val">3.4 × 10<sup>38</sup></span>
+            </div>
+            <div class="s7-row">
+              <span class="s7-row-label">Header Size</span>
+              <span class="s7-row-val">Fixed 40 bytes</span>
+            </div>
+            <div class="s7-row">
+              <span class="s7-row-label">NAT Required</span>
+              <span class="s7-row-val">No</span>
+            </div>
+            <div class="s7-row">
+              <span class="s7-row-label">Configuration</span>
+              <span class="s7-row-val">SLAAC / DHCPv6</span>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================
+       SLIDE 8 – ROUTING VS SWITCHING (PREMIUM)
+       ====================================================== -->
+  <div class="slide" id="slide-8">
+    <div class="slide-inner">
+      <div class="slide-header">
+        <div class="slide-label">Core Concepts</div>
+        <div class="slide-title">Routing vs Switching</div>
+        <div class="accent-bar"></div>
+      </div>
+      <div class="s8-panels">
+        <!-- ROUTING -->
+        <div class="s8-panel">
+          <div class="s8-panel-head">
+            <div class="s8-icon-box routing">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+            </div>
+            <div>
+              <div class="s8-panel-name">Routing</div>
+              <div style="font-size:12px;color:#888;margin-top:3px;">Layer 3 — Network Layer</div>
+            </div>
+          </div>
+          <p style="font-size:13.5px;color:#555;line-height:1.65;">Routing is the process of forwarding packets between different networks by selecting the optimal path based on IP addresses and routing tables.</p>
+          <div class="s8-meta-grid">
+            <div class="s8-meta">
+              <div class="s8-meta-label">OSI Layer</div>
+              <div class="s8-meta-val">Layer 3 — Network</div>
+            </div>
+            <div class="s8-meta">
+              <div class="s8-meta-label">Primary Device</div>
+              <div class="s8-meta-val">Cisco ISR Router</div>
+            </div>
+            <div class="s8-meta">
+              <div class="s8-meta-label">Address Used</div>
+              <div class="s8-meta-val">IP Address (L3)</div>
+            </div>
+            <div class="s8-meta">
+              <div class="s8-meta-label">Main Protocol</div>
+              <div class="s8-meta-val">OSPF / EIGRP / BGP</div>
+            </div>
+          </div>
+          
+        </div>
+
+        <!-- DIVIDER -->
+        <div class="s8-divider"></div>
+
+        <!-- SWITCHING -->
+        <div class="s8-panel">
+          <div class="s8-panel-head">
+            <div class="s8-icon-box switching">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="20" height="10" rx="2"/><path stroke-linecap="round" d="M6 12h.01M10 12h.01M14 12h.01M18 12h.01"/></svg>
+            </div>
+            <div>
+              <div class="s8-panel-name">Switching</div>
+              <div style="font-size:12px;color:#888;margin-top:3px;">Layer 2 — Data Link Layer</div>
+            </div>
+          </div>
+          <p style="font-size:13.5px;color:#555;line-height:1.65;">Switching is the process of forwarding frames within the same local network segment using MAC address tables to deliver data to the correct device.</p>
+          <div class="s8-meta-grid">
+            <div class="s8-meta">
+              <div class="s8-meta-label">OSI Layer</div>
+              <div class="s8-meta-val">Layer 2 — Data Link</div>
+            </div>
+            <div class="s8-meta">
+              <div class="s8-meta-label">Primary Device</div>
+              <div class="s8-meta-val">Cisco Catalyst Switch</div>
+            </div>
+            <div class="s8-meta">
+              <div class="s8-meta-label">Address Used</div>
+              <div class="s8-meta-val">MAC Address (L2)</div>
+            </div>
+            <div class="s8-meta">
+              <div class="s8-meta-label">Main Feature</div>
+              <div class="s8-meta-val">VLAN / STP / EtherChannel</div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======================================================
+       SLIDE 9 – SECURITY (DARK + GLASSMORPHISM)
+       ====================================================== -->
+  <div class="slide" id="slide-9">
+    <div class="slide-inner">
+      <div class="slide-header">
+        <div class="slide-label">Network Security</div>
+        <div class="slide-title" style="color:#fff;">Security Fundamentals</div>
+        <div class="accent-bar"></div>
+      </div>
+      <div class="s9-grid">
+        <div class="s9-card">
+          <div class="s9-card-accent"></div>
+          <div class="s9-icon-wrap">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"/></svg>
+          </div>
+          <div class="s9-card-title">Firewall</div>
+          <div class="s9-card-body">Stateful packet inspection and zone-based firewalls control traffic between trusted and untrusted network segments using ACLs and policy-based rules.</div>
+        </div>
+        <div class="s9-card">
+          <div class="s9-card-accent"></div>
+          <div class="s9-icon-wrap">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          </div>
+          <div class="s9-card-title">VPN</div>
+          <div class="s9-card-body">Site-to-site and remote access VPNs encrypt traffic over public networks using IPsec and SSL/TLS, extending the corporate network securely to remote locations.</div>
+        </div>
+        <div class="s9-card">
+          <div class="s9-card-accent"></div>
+          <div class="s9-icon-wrap">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <div class="s9-card-title">Authentication</div>
+          <div class="s9-card-body">AAA frameworks — Authentication, Authorization, and Accounting — enforce identity-based access using RADIUS and TACACS+ protocols on Cisco devices.</div>
+        </div>
+        <div class="s9-card">
+          <div class="s9-card-accent"></div>
+          <div class="s9-icon-wrap">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          </div>
+          <div class="s9-card-title">Access Control</div>
+          <div class="s9-card-body">Standard and extended ACLs filter traffic by source, destination, and protocol. Port security on switches limits connected devices and prevents MAC flooding attacks.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================
+       SLIDE 10 – CAREER ROADMAP
+       ====================================================== -->
+  <div class="slide" id="slide-10">
+    <div class="slide-inner" style="flex-direction:row;padding:0;gap:0;">
+      <div class="s10-left">
+        <div class="slide-label">Career Path</div>
+        <div class="slide-title">Career Opportunities</div>
+        <div class="accent-bar"></div>
+        <div class="s10-left-body">
+          CCNA opens a structured advancement path in enterprise networking. Each role builds directly on the skills validated by the previous certification level, creating a clear and rewarding trajectory.
+        </div>
+        <div style="margin-top:20px;">
+          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=80" alt="IT Team" style="width:100%;border-radius:8px;object-fit:cover;height:160px;" />
+        </div>
+      </div>
+      <div class="s10-right">
+        <div class="career-step">
+          <div class="career-marker">
+            <div class="career-circle highlight">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438"/></svg>
+            </div>
+          </div>
+          <div class="career-content">
+            <div class="career-title">CCNA Certified</div>
+            <div class="career-desc">Foundation certification — validated networking knowledge across all five domains of the 200-301 exam.</div>
+          </div>
+        </div>
+        <div class="career-step">
+          <div class="career-marker">
+            <div class="career-circle">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+            </div>
+          </div>
+          <div class="career-content">
+            <div class="career-title">Network Technician</div>
+            <div class="career-desc">Entry role focused on installation, maintenance, and basic troubleshooting of network equipment and cabling.</div>
+          </div>
+        </div>
+        <div class="career-step">
+          <div class="career-marker">
+            <div class="career-circle">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </div>
+          <div class="career-content">
+            <div class="career-title">Network Administrator</div>
+            <div class="career-desc">Manages day-to-day network operations, VLAN configuration, switch/router management, and user support escalations.</div>
+          </div>
+        </div>
+        <div class="career-step">
+          <div class="career-marker">
+            <div class="career-circle">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" d="M2 12h20"/></svg>
+            </div>
+          </div>
+          <div class="career-content">
+            <div class="career-title">Network Engineer</div>
+            <div class="career-desc">Designs, deploys, and optimizes enterprise networks. Typically pursues CCNP to validate advanced skills.</div>
+          </div>
+        </div>
+        <div class="career-step">
+          <div class="career-marker">
+            <div class="career-circle">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+          </div>
+          <div class="career-content">
+            <div class="career-title">Senior Network Engineer</div>
+            <div class="career-desc">Leads complex infrastructure projects, mentors junior engineers, and owns architectural decisions for large-scale environments.</div>
+          </div>
+        </div>
+        <div class="career-step">
+          <div class="career-marker">
+            <div class="career-circle" style="border-color:var(--accent);">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color:var(--accent);"><path stroke-linecap="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+            </div>
+          </div>
+          <div class="career-content">
+            <div class="career-title">Network Architect</div>
+            <div class="career-desc">Designs enterprise-wide network strategies, cloud integrations, and security frameworks at the executive level.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================
+       SLIDE 11 – BENEFITS
+       ====================================================== -->
+  <div class="slide" id="slide-11">
+    <div class="slide-inner">
+      <div class="slide-header">
+        <div class="slide-label">Value</div>
+        <div class="slide-title">Benefits of CCNA</div>
+        <div class="accent-bar"></div>
+      </div>
+      <div class="s11-layout">
+       
+        <div class="s11-benefits">
+          <div class="s11-benefit-card">
+            <div class="s11-benefit-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            </div>
+            <div class="s11-benefit-info">
+              <div class="s11-benefit-name">Hands-on Skills</div>
+              <div class="s11-benefit-sub">Real lab exercises on Cisco hardware and simulators</div>
+            </div>
+          </div>
+          <div class="s11-benefit-card">
+            <div class="s11-benefit-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0"/></svg>
+            </div>
+            <div class="s11-benefit-info">
+              <div class="s11-benefit-name">Global Recognition</div>
+              <div class="s11-benefit-sub">Cisco credentials respected by enterprise employers worldwide</div>
+            </div>
+          </div>
+          <div class="s11-benefit-card">
+            <div class="s11-benefit-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <div class="s11-benefit-info">
+              <div class="s11-benefit-name">Higher Salary</div>
+              <div class="s11-benefit-sub">CCNA-certified professionals earn 15–25% more on average</div>
+            </div>
+          </div>
+          <div class="s11-benefit-card">
+            <div class="s11-benefit-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+            </div>
+            <div class="s11-benefit-info">
+              <div class="s11-benefit-name">Career Growth</div>
+              <div class="s11-benefit-sub">Structured path from technician to network architect</div>
+            </div>
+          </div>
+          <div class="s11-benefit-card">
+            <div class="s11-benefit-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+            </div>
+            <div class="s11-benefit-info">
+              <div class="s11-benefit-name">Industry Standard</div>
+              <div class="s11-benefit-sub">The benchmark entry credential for enterprise networking roles</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================
+       SLIDE 12 – THANK YOU
+       ====================================================== -->
+  <div class="slide" id="slide-12">
+    <div class="s12-inner">
+      <div class="s12-tag">Cisco Certified Network Associate</div>
+      <div class="s12-title">Thank You</div>
+      <div class="s12-sub">Questions?</div>
+      <div class="s12-divider"></div>
+      <div class="s12-contact">
+        <div class="s12-contact-item">
+          <span class="s12-contact-label">Presenter</span>
+          <span class="s12-contact-value">Abdelaziz Mohamed</span>
+        </div>
+    
+      </div>
+      
+    </div>
+  </div>
+
+</div><!-- /presentation -->
+
+<!-- ======================================================
+     NAVIGATION
+     ====================================================== -->
+<div id="nav">
+  <button id="prev-btn" aria-label="Previous slide">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+  </button>
+  <span id="counter">1 / 12</span>
+  <button id="next-btn" aria-label="Next slide">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+  </button>
+  <button id="fullscreen-btn" aria-label="Toggle fullscreen">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 8V6a2 2 0 012-2h2M4 16v2a2 2 0 002 2h2m8-16h2a2 2 0 012 2v2m0 8v2a2 2 0 01-2 2h-2"/></svg>
+  </button>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  let current = 0;
+
+  const counterEl = document.getElementById('counter');
+  const prevBtn   = document.getElementById('prev-btn');
+  const nextBtn   = document.getElementById('next-btn');
+  const fsBtn     = document.getElementById('fullscreen-btn');
+
+  function goTo(index) {
+    slides[current].classList.remove('active');
+    current = (index + total) % total;
+    slides[current].classList.add('active');
+    counterEl.textContent = (current + 1) + ' / ' + total;
+  }
+
+  prevBtn.addEventListener('click', () => goTo(current - 1));
+  nextBtn.addEventListener('click', () => goTo(current + 1));
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goTo(current + 1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   goTo(current - 1);
+  });
+
+  fsBtn.addEventListener('click', function () {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+      document.exitFullscreen().catch(() => {});
+    }
+  });
+
+  document.addEventListener('fullscreenchange', function () {
+    if (document.fullscreenElement) {
+      fsBtn.innerHTML = '<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>';
+    } else {
+      fsBtn.innerHTML = '<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 8V6a2 2 0 012-2h2M4 16v2a2 2 0 002 2h2m8-16h2a2 2 0 012 2v2m0 8v2a2 2 0 01-2 2h-2"/></svg>';
+    }
+  });
+})();
+</script>
+</body>
+</html>
